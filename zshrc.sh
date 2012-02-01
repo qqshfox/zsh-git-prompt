@@ -17,22 +17,22 @@ add-zsh-hook precmd precmd_update_git_vars
 
 ## Function definitions
 function preexec_update_git_vars() {
-    case "$2" in
-        git*)
-        __EXECUTED_GIT_COMMAND=1
-        ;;
-    esac
+  if [[ -d ".git" ]]; then
+    __EXECUTED_GIT_COMMAND=1  
+  fi  
 }
 
 function precmd_update_git_vars() {
     if [ -n "$__EXECUTED_GIT_COMMAND" ]; then
-        update_current_git_vars
+        time update_current_git_vars
         unset __EXECUTED_GIT_COMMAND
     fi
 }
 
 function chpwd_update_git_vars() {
-    update_current_git_vars
+    if [[ -d ".git" ]]; then
+      update_current_git_vars
+    fi  
 }
 
 function update_current_git_vars() {
