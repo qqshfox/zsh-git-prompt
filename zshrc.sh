@@ -2,6 +2,7 @@
 
 # Change this to reflect your installation directory
 export __GIT_PROMPT_DIR=~/.zsh/git-prompt
+PERIOD=1 
 # Initialize colors.
 autoload -U colors
 colors
@@ -11,26 +12,10 @@ setopt PROMPT_SUBST
 
 autoload -U add-zsh-hook
 
-add-zsh-hook chpwd chpwd_update_git_vars
-add-zsh-hook preexec preexec_update_git_vars
-add-zsh-hook precmd precmd_update_git_vars
+add-zsh-hook precmd update_git_vars
 
-## Function definitions
-function preexec_update_git_vars() {
-  if [[ -d ".git" ]]; then
-    __EXECUTED_GIT_COMMAND=1  
-  fi  
-}
-
-function precmd_update_git_vars() {
-    if [ -n "$__EXECUTED_GIT_COMMAND" ]; then
-        time update_current_git_vars
-        unset __EXECUTED_GIT_COMMAND
-    fi
-}
-
-function chpwd_update_git_vars() {
-    if [[ -d ".git" ]]; then
+function update_git_vars() {
+    if [ -d .git ]; then
       update_current_git_vars
     fi  
 }
