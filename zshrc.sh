@@ -15,9 +15,7 @@ autoload -U add-zsh-hook
 add-zsh-hook precmd update_git_vars
 
 function update_git_vars() {
-    if [ -d .git ]; then
-      update_current_git_vars
-    fi  
+    update_current_git_vars
 }
 
 function update_current_git_vars() {
