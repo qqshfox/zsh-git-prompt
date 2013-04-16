@@ -63,7 +63,7 @@ else:
 			remote += '%s%s' % (symbols['ahead of'], ahead)
 
 out = '\n'.join([
-	str(branch),
+	branch.decode('ASCII'),
 	remote,
 	staged,
 	conflicts,
